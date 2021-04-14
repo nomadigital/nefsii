@@ -6,13 +6,14 @@
       </v-container>
     </v-main>
     <v-footer
+      class="grey lighten-3 justify-center"
       app
-      class="justify-center"
     >
       <span>
         <a
           href="https://github.com/nomadigital/nefsii"
           target="_blank"
+          rel="noreferrer"
         >nomadigital</a> &copy; {{ new Date().getFullYear() }}
       </span>
     </v-footer>

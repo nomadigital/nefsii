@@ -49,5 +49,6 @@
   "start_url": "/nefsii/?standalone=true",
   "display": "standalone",
   "background_color": "#ffffff",
+  "theme_color": "#4c6ef5",
   "lang": "en"
 }

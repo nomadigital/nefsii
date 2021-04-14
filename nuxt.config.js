@@ -27,7 +27,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: 'Simple islamic pwa' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -63,6 +63,10 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    },
+    meta: {
+      mobileAppIOS: true,
+      theme_color: '#4c6ef5'
     }
   },
 
