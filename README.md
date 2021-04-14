@@ -1,5 +1,11 @@
 # nefsii
 
+A simple islamic pwa
+
+## Demo
+
+[https://nomadigital.github.io/nefsii](https://nomadigital.github.io/nefsii)
+
 ## Build Setup
 
 ```bash
