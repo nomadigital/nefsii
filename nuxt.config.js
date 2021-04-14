@@ -4,6 +4,13 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  server: {
+    port: 3000,
+    host: '192.168.1.186',
+    // host: 'localhost',
+    timing: false
+  },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -65,8 +72,8 @@ export default {
       lang: 'en'
     },
     meta: {
-      mobileAppIOS: true,
-      theme_color: '#4c6ef5'
+      theme_color: '#4c6ef5',
+      nativeUI: true
     }
   },
 

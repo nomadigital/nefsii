@@ -1,7 +1,7 @@
 <template>
   <img
-    height="180"
-    width="180"
+    height="100"
+    width="100"
     alt="Logo"
     src="/nefsii/logo.svg"
   >

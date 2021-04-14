@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <v-main>
-      <v-container>
+      <v-container class="fill-height">
         <nuxt />
       </v-container>
     </v-main>
     <v-footer
-      class="grey lighten-3 justify-center"
+      class="justify-center"
       app
     >
       <span>

@@ -1,14 +1,14 @@
 <template>
-  <v-row justify="center" align="center">
+  <v-row class="justify-center align-center">
     <v-col cols="12" sm="8" md="6">
       <div class="text-center">
         <logo />
       </div>
       <v-card class="text-center">
-        <v-card-title class="justify-center headline">
-          Horaire des prières<br />
-          Belgique<br />
-          {{ getHijriDate() }}<br />
+        <v-card-title class="justify-center h4">
+          Horaire des prières<br>
+          Belgique<br>
+          {{ getHijriDate() }}<br>
           {{ getFrenchFormatedDate() }}
         </v-card-title>
         <v-card-text>
