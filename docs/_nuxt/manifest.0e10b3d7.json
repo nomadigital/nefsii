@@ -1,7 +1,7 @@
 {
   "name": "nefsii",
   "short_name": "nefsii",
-  "description": "## Build Setup",
+  "description": "A simple islamic pwa",
   "icons": [
     {
       "src": "/nefsii/_nuxt/icons/icon_64x64.c390ef.png",
