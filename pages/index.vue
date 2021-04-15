@@ -68,7 +68,7 @@ export default {
         { id: 19, name: 'Oostende', lag: 6 },
         { id: 20, name: 'Weert', lag: -5 }
       ],
-      city: { id: 1, name: 'Bruxelles', lag: 0 }
+      city: { id: 1, name: 'Charleroi', lag: 0 }
     }
   },
   methods: {
