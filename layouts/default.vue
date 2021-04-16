@@ -3,7 +3,7 @@
     <v-main>
       <v-container class="fill-height">
         <nuxt />
-        <v-fab-transition v-if="!isSharable">
+        <v-fab-transition v-if="isSharable">
           <v-btn
             color="indigo accent-2"
             fab
