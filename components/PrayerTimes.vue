@@ -2,12 +2,12 @@
   <v-simple-table dense>
     <template #default>
       <tbody>
-        <tr>
+        <tr class="font-weight-bold blue lighten-5">
           <td>Fajr</td>
           <td>{{ getTimeWithLag(prayerTimes[0]) }}</td>
         </tr>
         <tr>
-          <td>Shurouq</td>
+          <td>Shuruq</td>
           <td>{{ getTimeWithLag(prayerTimes[1]) }}</td>
         </tr>
         <tr>
@@ -18,8 +18,8 @@
           <td>Asr</td>
           <td>{{ getTimeWithLag(prayerTimes[3]) }}</td>
         </tr>
-        <tr>
-          <td>Maghreb</td>
+        <tr class="font-weight-bold blue lighten-5">
+          <td>Maghrib</td>
           <td>{{ getTimeWithLag(prayerTimes[4]) }}</td>
         </tr>
         <tr>
