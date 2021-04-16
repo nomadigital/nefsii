@@ -14,12 +14,13 @@
           <div>Belgique</div>
         </v-card-subtitle>
         <v-sheet class="d-flex justify-center">
-          <v-sheet width="150">
+          <v-sheet width="151">
             <v-select
               v-model="city"
               :items="cities"
               class="pb-0"
               label="Ville"
+              item-value="id"
               item-text="name"
               return-object
               dense
@@ -47,8 +48,8 @@ export default {
   data () {
     return {
       cities: [
-        { id: 1, name: 'Charleroi', lag: 0 },
-        { id: 2, name: 'Bruxelles', lag: 0 },
+        { id: 1, name: 'Bruxelles', lag: 0 },
+        { id: 2, name: 'Charleroi', lag: 0 },
         { id: 3, name: 'Antwerpen', lag: 0 },
         { id: 4, name: 'Liège', lag: -5 },
         { id: 5, name: 'Mons', lag: 2 },
@@ -68,7 +69,7 @@ export default {
         { id: 19, name: 'Oostende', lag: 6 },
         { id: 20, name: 'Weert', lag: -5 }
       ],
-      city: { id: 1, name: 'Charleroi', lag: 0 }
+      city: { id: 2, name: 'Charleroi', lag: 0 }
     }
   },
   methods: {
