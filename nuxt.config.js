@@ -34,10 +34,10 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Simple islamic pwa' }
+      { hid: 'description', name: 'description', content: 'Simple islamic app' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/nefsii/favicon.ico' }
     ]
   },
 
@@ -72,6 +72,8 @@ export default {
       lang: 'en'
     },
     meta: {
+      title: 'nefsii',
+      author: 'nomadigital',
       theme_color: '#4c6ef5',
       nativeUI: true
     }

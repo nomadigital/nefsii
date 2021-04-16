@@ -1,4 +1,4 @@
-# nefsii
+# Nefsii
 
 A simple islamic pwa
 
