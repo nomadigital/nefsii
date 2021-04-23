@@ -9,8 +9,8 @@
           Horaire des prières
         </v-card-title>
         <v-card-subtitle class="text-center">
-          <div>{{ getHijriDate() }}</div>
-          <div>{{ getFrenchFormatedDate() }}</div>
+          <div>{{ hijriDate }}</div>
+          <div>{{ frenchFormatedDate }}</div>
           <div>Belgique</div>
         </v-card-subtitle>
         <v-sheet class="d-flex justify-center">
@@ -39,6 +39,9 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import PrayerTimes from '~/components/PrayerTimes.vue'
+
+const iMonthNames = ['Muharram', 'Safar', 'Rabi\'ul Awwal', 'Rabi\'ul Akhir', 'Jumadal Ula', 'Jumadal Akhira',
+  'Rajab', 'Sha\'ban', 'Ramadan', 'Shawwal', 'Dhul Qa\'ada', 'Dhul Hijja']
 
 export default {
   components: {
@@ -72,12 +75,14 @@ export default {
       city: { id: 2, name: 'Charleroi', lag: 0 }
     }
   },
-  methods: {
-    getFrenchFormatedDate () {
-      return new Intl.DateTimeFormat('fr-TN-u-ca', { day: 'numeric', month: 'long', year: 'numeric' }).format(Date.now())
+  computed: {
+    hijriDate () {
+      let hijriDate = new Intl.DateTimeFormat('fr-TN-u-ca-islamic', { day: 'numeric', month: 'numeric', year: 'numeric' }).format(Date.now()).toString()
+      hijriDate = hijriDate.split('/')[0] + ' ' + iMonthNames[parseInt(hijriDate.split('/')[1]) - 1] + ' ' + hijriDate.split('/')[2]
+      return hijriDate
     },
-    getHijriDate () {
-      return new Intl.DateTimeFormat('fr-TN-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' }).format(Date.now())
+    frenchFormatedDate () {
+      return new Intl.DateTimeFormat('fr-TN-u-ca', { day: 'numeric', month: 'long', year: 'numeric' }).format(Date.now())
     }
   }
 }

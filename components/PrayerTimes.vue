@@ -2,29 +2,13 @@
   <v-simple-table dense>
     <template #default>
       <tbody>
-        <tr class="font-weight-bold blue lighten-5">
-          <td>Fajr</td>
-          <td>{{ getTimeWithLag(prayerTimes[0]) }}</td>
-        </tr>
-        <tr>
-          <td>Shuruq</td>
-          <td>{{ getTimeWithLag(prayerTimes[1]) }}</td>
-        </tr>
-        <tr>
-          <td>Dhuhr</td>
-          <td>{{ getTimeWithLag(prayerTimes[2]) }}</td>
-        </tr>
-        <tr>
-          <td>Asr</td>
-          <td>{{ getTimeWithLag(prayerTimes[3]) }}</td>
-        </tr>
-        <tr class="font-weight-bold blue lighten-5">
-          <td>Maghrib</td>
-          <td>{{ getTimeWithLag(prayerTimes[4]) }}</td>
-        </tr>
-        <tr>
-          <td>Isha</td>
-          <td>{{ getTimeWithLag(prayerTimes[5]) }}</td>
+        <tr
+          v-for="(item, index) in prayerNames"
+          :key="index"
+          :class="{ 'font-weight-bold blue lighten-5': index === 0 || index === 4 }"
+        >
+          <td>{{ item }}</td>
+          <td>{{ getTimeWithLag(prayerTimes[index]) }}</td>
         </tr>
       </tbody>
     </template>
@@ -41,15 +25,34 @@ export default {
       default: 0
     }
   },
-  computed: {
-    prayerTimes () {
-      return PrayerTimes[this.getDate()]
+  data () {
+    return {
+      prayerNames: [
+        'Fajr',
+        'Shuruq',
+        'Dhuhr',
+        'Asr',
+        'Maghrib',
+        'Isha'
+      ]
     }
   },
-  methods: {
-    getDate () {
-      return new Date().toISOString().split('T')[0]
+  computed: {
+    localDate () {
+      const localDate = new Intl.DateTimeFormat('fr', { timeZone: 'Europe/Brussels' }).format(Date.now()).toString()
+      return localDate.split('/')[2] + '-' + localDate.split('/')[1] + '-' + localDate.split('/')[0]
     },
+    prayerTimes () {
+      return PrayerTimes[this.localDate]
+    }
+  },
+  mounted () {
+    // TODO schedule notifications for each future prayer time
+    // if ('showTrigger' in Notification.prototype) {
+    //   this.scheduleNotification(???)
+    // }
+  },
+  methods: {
     addTimes (t0, t1) {
       return this.secsToTime(this.timeToSecs(t0) + this.timeToSecs(t1))
     },
@@ -70,6 +73,18 @@ export default {
     getTimeWithLag (time) {
       return this.addTimes(this.secsToTime(this.lag * 60), time + ':00').slice(0, -3)
     }
+    // TODO check when this feature will be available to schedule notifications
+    // https://web.dev/notification-triggers/
+    // scheduleNotification (timestamp) {
+    //   navigator.serviceWorker.ready.then((registration) => {
+    //     registration.showNotification('nefsii', {
+    //       body: 'Prière',
+    //       icon: '/nefsii/icon.png',
+    //       /* eslint-disable-next-line no-undef */
+    //       showTrigger: new TimestampTrigger(timestamp)
+    //     })
+    //   })
+    // }
   }
 }
 </script>

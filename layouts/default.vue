@@ -14,7 +14,10 @@
             absolute
             @click="share()"
           >
-            <v-icon>mdi-share-variant</v-icon>
+            <img
+              :src="shareIcon"
+              alt="share"
+            >
           </v-btn>
         </v-fab-transition>
       </v-container>
@@ -42,6 +45,7 @@
 
 <script>
 import Toast from '~/components/Toast.vue'
+import ShareIcon from '~/static/share-variant.png'
 
 export default {
   components: {
@@ -53,12 +57,27 @@ export default {
   computed: {
     isSharable () {
       return navigator.share
+    },
+    shareIcon () {
+      return ShareIcon
     }
   },
   mounted () {
     this.$root.$toast = this.$refs.toast.open
+    // TODO enable request permission to notify on prayer time
+    // if (Notification.permission === 'default') { this.requestNotificationPermission() }
   },
   methods: {
+    async requestNotificationPermission () {
+      const result = await Notification.requestPermission()
+      if (result === 'granted') {
+        this.$root.$toast('success', 'Permission accordée')
+      } else if (result === 'denied') {
+        this.$root.$toast('error', 'Permission refusée')
+      } else {
+        this.$root.$toast('warning', 'Permission ignorée')
+      }
+    },
     share () {
       const title = document.title
       const url = document.location.href
@@ -67,7 +86,7 @@ export default {
         navigator.share({ title, url, text }).then(() => {
           this.$root.$toast('success', 'Merci pour le partage')
         }).catch((error) => {
-          this.$root.$toast('warning', 'Impossible de partager ' + error)
+          this.$root.$toast('warning', error)
         })
       } else {
         this.$root.$toast('error', 'Pas supporté 🙅!!')
