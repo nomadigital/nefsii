@@ -1,4 +1,11 @@
 /*!
+	    localForage -- Offline Storage, Improved
+	    Version 1.7.3
+	    https://localforage.github.io/localForage
+	    (c) 2013-2017 Mozilla, Apache License 2.0
+	*/
+
+/*!
  * vue-client-only v2.0.0
  * (c) 2019-present egoist <0x142857@gmail.com>
  * Released under the MIT License.

@@ -84,6 +84,18 @@ export default {
     frenchFormatedDate () {
       return new Intl.DateTimeFormat('fr-TN-u-ca', { day: 'numeric', month: 'long', year: 'numeric' }).format(Date.now())
     }
+  },
+  watch: {
+    city (val) {
+      this.$localForage.setItem('city', val.id)
+    }
+  },
+  mounted () {
+    this.$localForage.getItem('city').then((val) => {
+      if (val) {
+        this.city = this.cities.find(obj => obj.id === val)
+      }
+    })
   }
 }
 </script>
