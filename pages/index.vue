@@ -8,28 +8,31 @@
         <v-card-title class="justify-center h4">
           Horaire des prières
         </v-card-title>
-        <v-card-subtitle class="text-center">
-          <div>{{ hijriDate }}</div>
+        <v-card-subtitle class="text-center pb-0">
+          <div>{{ hijriFormatedDate }}</div>
           <div>{{ frenchFormatedDate }}</div>
           <div>Belgique</div>
         </v-card-subtitle>
-        <v-sheet class="d-flex justify-center">
+        <v-sheet class="d-flex justify-center mt-2 mb-3">
           <v-sheet width="151">
             <v-select
               v-model="city"
               :items="cities"
-              class="pb-0"
               label="Ville"
               item-value="id"
               item-text="name"
               return-object
+              hide-details
               dense
               solo
             />
           </v-sheet>
         </v-sheet>
         <v-card-text class="text-center pt-0">
-          <prayer-times :lag="city.lag" />
+          <prayer-times
+            :lag="city.lag"
+            :hijri-month="parseInt(hijriDate.split('/')[1])"
+          />
         </v-card-text>
       </v-card>
     </v-col>
@@ -77,9 +80,12 @@ export default {
   },
   computed: {
     hijriDate () {
-      let hijriDate = new Intl.DateTimeFormat('fr-TN-u-ca-islamic', { day: 'numeric', month: 'numeric', year: 'numeric' }).format(Date.now()).toString()
-      hijriDate = hijriDate.split('/')[0] + ' ' + iMonthNames[parseInt(hijriDate.split('/')[1]) - 1] + ' ' + hijriDate.split('/')[2]
-      return hijriDate
+      return new Intl.DateTimeFormat('fr-TN-u-ca-islamic', { day: 'numeric', month: 'numeric', year: 'numeric' }).format(Date.now()).toString()
+    },
+    hijriFormatedDate () {
+      return this.hijriDate.split('/')[0] + ' ' +
+        iMonthNames[parseInt(this.hijriDate.split('/')[1]) - 1] + ' ' +
+        this.hijriDate.split('/')[2].split(' ')[0]
     },
     frenchFormatedDate () {
       return new Intl.DateTimeFormat('fr-TN-u-ca', { day: 'numeric', month: 'long', year: 'numeric' }).format(Date.now())

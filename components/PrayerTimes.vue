@@ -1,6 +1,34 @@
 <template>
   <v-simple-table dense>
     <template #default>
+      <caption v-if="hijriMonth === 9">
+        <countdown
+          ref="countdown"
+          :start-time="halfHourBeforeMaghrib"
+          :end-time="maghribDateTime"
+        >
+          <v-alert
+            slot="process"
+            slot-scope="{ timeObj }"
+            class="mb-0"
+            color="warning"
+            dense
+            text
+          >
+            {{ `${timeObj.m}:${timeObj.s} avant l\'Iftar` }}
+          </v-alert>
+          <v-alert
+            v-if="showIftarDua"
+            slot="finish"
+            color="success"
+            class="mb-0"
+            dense
+            text
+          >
+            ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللّٰهُ
+          </v-alert>
+        </countdown>
+      </caption>
       <tbody>
         <tr
           v-for="(item, index) in prayerNames"
@@ -23,6 +51,10 @@ export default {
     lag: {
       type: Number,
       default: 0
+    },
+    hijriMonth: {
+      type: Number,
+      default: 1
     }
   },
   data () {
@@ -39,11 +71,38 @@ export default {
   },
   computed: {
     localDate () {
-      const localDate = new Intl.DateTimeFormat('fr', { timeZone: 'Europe/Brussels' }).format(Date.now()).toString()
-      return localDate.split('/')[2] + '-' + localDate.split('/')[1] + '-' + localDate.split('/')[0]
+      return new Date().toISOString().split('T')[0]
     },
     prayerTimes () {
       return PrayerTimes[this.localDate]
+    },
+    maghribDateTime () {
+      return new Date().setHours(
+        parseInt(this.getTimeWithLag(this.prayerTimes[4]).split(':')[0]),
+        parseInt(this.getTimeWithLag(this.prayerTimes[4]).split(':')[1])
+      )
+    },
+    halfHourBeforeMaghrib () {
+      return new Date().setHours(
+        parseInt(this.substractTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[0]),
+        parseInt(this.substractTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[1])
+      )
+    },
+    halfHourAfterMaghrib () {
+      return new Date().setHours(
+        parseInt(this.addTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[0]),
+        parseInt(this.addTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[1])
+      )
+    },
+    showIftarDua () {
+      return this.maghribDateTime < new Date() < this.halfHourAfterMaghrib
+    }
+  },
+  watch: {
+    lag (val) {
+      this.$nextTick(() => {
+        this.$refs.countdown.startCountdown('restart')
+      })
     }
   },
   mounted () {
@@ -55,6 +114,9 @@ export default {
   methods: {
     addTimes (t0, t1) {
       return this.secsToTime(this.timeToSecs(t0) + this.timeToSecs(t1))
+    },
+    substractTimes (t0, t1) {
+      return this.secsToTime(this.timeToSecs(t0) - this.timeToSecs(t1))
     },
     timeToSecs (time) {
       const sign = /^-/.test(time)
