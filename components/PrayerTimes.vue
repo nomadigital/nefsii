@@ -95,13 +95,15 @@ export default {
       )
     },
     showIftarDua () {
-      return this.maghribDateTime < new Date() < this.halfHourAfterMaghrib
+      return (new Date() < this.halfHourAfterMaghrib)
     }
   },
   watch: {
     lag (val) {
       this.$nextTick(() => {
-        this.$refs.countdown.startCountdown('restart')
+        if ((this.halfHourBeforeMaghrib < new Date()) && (new Date() < this.maghribDateTime)) {
+          this.$refs.countdown.startCountdown('restart')
+        }
       })
     }
   },
