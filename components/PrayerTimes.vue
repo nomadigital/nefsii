@@ -11,7 +11,7 @@
             slot="process"
             slot-scope="{ timeObj }"
             class="mb-0"
-            color="warning"
+            color="orange"
             dense
             text
           >
@@ -20,7 +20,7 @@
           <v-alert
             v-if="showIftarDua"
             slot="finish"
-            color="success"
+            color="green"
             class="mb-0"
             dense
             text
