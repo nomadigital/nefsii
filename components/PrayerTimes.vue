@@ -71,25 +71,28 @@ export default {
   },
   computed: {
     localDate () {
-      return new Date().toISOString().split('T')[0]
+      return new Intl.DateTimeFormat('fr', { timeZone: 'Europe/Brussels' }).format(Date.now()).toString()
+    },
+    formatedLocalDate () {
+      return this.localDate.split('/')[2] + '-' + this.localDate.split('/')[1] + '-' + this.localDate.split('/')[0]
     },
     prayerTimes () {
-      return PrayerTimes[this.localDate]
+      return PrayerTimes[this.formatedLocalDate]
     },
     maghribDateTime () {
-      return new Date().setHours(
+      return new Date(this.formatedLocalDate).setHours(
         parseInt(this.getTimeWithLag(this.prayerTimes[4]).split(':')[0]),
         parseInt(this.getTimeWithLag(this.prayerTimes[4]).split(':')[1])
       )
     },
     halfHourBeforeMaghrib () {
-      return new Date().setHours(
+      return new Date(this.formatedLocalDate).setHours(
         parseInt(this.substractTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[0]),
         parseInt(this.substractTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[1])
       )
     },
     halfHourAfterMaghrib () {
-      return new Date().setHours(
+      return new Date(this.formatedLocalDate).setHours(
         parseInt(this.addTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[0]),
         parseInt(this.addTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[1])
       )
