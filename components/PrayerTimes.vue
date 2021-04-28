@@ -81,20 +81,20 @@ export default {
     },
     maghribDateTime () {
       return new Date(this.formatedLocalDate).setHours(
-        parseInt(this.getTimeWithLag(this.prayerTimes[3]).split(':')[0]),
-        parseInt(this.getTimeWithLag(this.prayerTimes[3]).split(':')[1])
+        parseInt(this.getTimeWithLag(this.prayerTimes[4]).split(':')[0]),
+        parseInt(this.getTimeWithLag(this.prayerTimes[4]).split(':')[1])
       )
     },
     halfHourBeforeMaghrib () {
       return new Date(this.formatedLocalDate).setHours(
-        parseInt(this.substractTimes(this.getTimeWithLag(this.prayerTimes[3]), this.secsToTime(30 * 60)).split(':')[0]),
-        parseInt(this.substractTimes(this.getTimeWithLag(this.prayerTimes[3]), this.secsToTime(30 * 60)).split(':')[1])
+        parseInt(this.substractTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[0]),
+        parseInt(this.substractTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[1])
       )
     },
     halfHourAfterMaghrib () {
       return new Date(this.formatedLocalDate).setHours(
-        parseInt(this.addTimes(this.getTimeWithLag(this.prayerTimes[3]), this.secsToTime(600 * 60)).split(':')[0]),
-        parseInt(this.addTimes(this.getTimeWithLag(this.prayerTimes[3]), this.secsToTime(600 * 60)).split(':')[1])
+        parseInt(this.addTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[0]),
+        parseInt(this.addTimes(this.getTimeWithLag(this.prayerTimes[4]), this.secsToTime(30 * 60)).split(':')[1])
       )
     },
     showIftarDua () {
