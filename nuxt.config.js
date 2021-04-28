@@ -87,13 +87,13 @@ export default {
     theme: {
       themes: {
         light: {
-          primary: colors.blue.accent2,
-          accent: colors.grey.darken2,
-          secondary: colors.purple.accent2,
-          info: colors.teal.accent2,
-          warning: colors.amber.accent2,
-          error: colors.deepOrange.accent2,
-          success: colors.green.accent2
+          primary: colors.blue,
+          accent: colors.grey,
+          secondary: colors.purple,
+          info: colors.teal,
+          warning: colors.orange,
+          error: colors.red,
+          success: colors.green
         }
       }
     }

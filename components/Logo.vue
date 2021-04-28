@@ -1,5 +1,6 @@
 <template>
   <img
+    ref="logo"
     height="70"
     width="70"
     alt="Logo"
