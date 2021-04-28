@@ -7,7 +7,6 @@ describe('Logo.vue', () => {
     expect(wrapper.vm).toBeTruthy()
   })
   it('have right size', () => {
-    const msg = "new message";
     const wrapper = shallowMount(Logo)
     const width = wrapper.vm.$refs.logo.getAttribute('width')
     const height = wrapper.vm.$refs.logo.getAttribute('height')
